@@ -141,6 +141,7 @@ local config = {
                 -- enable servers that you already have installed without mason
                 servers = {
                         -- "pyright"
+                        "solidity"
                 },
                 formatting = {
                         -- control auto formatting on save
@@ -178,6 +179,12 @@ local config = {
 
                 -- Add overrides for LSP server settings, the keys are the name of the server
                 ["server-settings"] = {
+                        solidity = {
+                                cmd = { 'nomicfoundation-solidity-language-server', '--stdio' },
+                                filetypes = { 'solidity' },
+                                root_dir = require("lspconfig.util").find_git_ancestor,
+                                single_file_support = true,
+                        },
                         -- example for addings schemas to yamlls
                         -- yamlls = { -- override table for require("lspconfig").yamlls.setup({...})
                         --   settings = {
@@ -278,6 +285,12 @@ local config = {
                 treesitter = { -- overrides `require("treesitter").setup(...)`
                         -- ensure_installed = { "lua" },
                 },
+                -- solidity = {
+                --         remapping = { ["@forge-std/"] = 'lib/forge-std/src/',
+                --                 ["@ds-test/"] = 'lib/forge-std/lib/ds-test/src/' },
+                --         root_pattern = { ".git", "foundry.toml" }
+                --
+                -- },
                 -- use mason-lspconfig to configure LSP installations
                 ["mason-lspconfig"] = { -- overrides `require("mason-lspconfig").setup(...)`
                         -- ensure_installed = { "sumneko_lua" },
