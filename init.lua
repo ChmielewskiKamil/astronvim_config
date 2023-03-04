@@ -240,6 +240,8 @@ local config = {
                                 --   require("vim-nightfly-colors").setup {}
                                 -- end,
                         },
+                        -- Huff syntax highlighting
+                        { "wuwe1/vim-huff", lazy = false },
 
                         "github/copilot.vim",
                         { "ggandor/leap.nvim", config = function() require("leap").add_default_mappings() end },
