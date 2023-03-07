@@ -182,7 +182,7 @@ local config = {
                         solidity = {
                                 cmd = { 'nomicfoundation-solidity-language-server', '--stdio' },
                                 filetypes = { 'solidity' },
-                                root_dir = require("lspconfig.util").find_git_ancestor,
+                                require("lspconfig.util").root_pattern "foundry.toml",
                                 single_file_support = true,
                         },
                         -- example for addings schemas to yamlls
@@ -246,6 +246,7 @@ local config = {
                         "github/copilot.vim",
                         { "ggandor/leap.nvim", config = function() require("leap").add_default_mappings() end },
                         "tpope/vim-repeat",
+                        "ruanyl/vim-gh-line",
 
                         -- You can disable default plugins as follows:
                         -- ["goolord/alpha-nvim"] = { disable = true },
