@@ -46,6 +46,7 @@ local config = {
                         spell = false, -- sets vim.opt.spell
                         signcolumn = "auto", -- sets vim.opt.signcolumn to auto
                         wrap = false, -- sets vim.opt.wrap
+                        formatoptions = "jcroqlt", -- sets vim.opt.formatoptions
                 },
                 g = {
                         mapleader = " ", -- sets vim.g.mapleader
@@ -132,7 +133,7 @@ local config = {
 
         -- Diagnostics configuration (for vim.diagnostics.config({...})) when diagnostics are on
         diagnostics = {
-                virtual_text = true,
+                virtual_text = false,
                 underline = true,
         },
 
@@ -184,6 +185,7 @@ local config = {
                                 filetypes = { 'solidity' },
                                 require("lspconfig.util").root_pattern "foundry.toml",
                                 single_file_support = true,
+                                includePath = "",
                         },
                         -- example for addings schemas to yamlls
                         -- yamlls = { -- override table for require("lspconfig").yamlls.setup({...})
@@ -242,33 +244,25 @@ local config = {
                         },
                         -- Huff syntax highlighting
                         { "wuwe1/vim-huff", lazy = false },
-
+                        -- Svelte syntax highlighting
+                        "evanleck/vim-svelte",
+                        -- official copilot
                         "github/copilot.vim",
+                        -- vim kangaroo
                         { "ggandor/leap.nvim", config = function() require("leap").add_default_mappings() end },
+                        -- improved "."
                         "tpope/vim-repeat",
+                        -- Open specific line in GitHub web app
                         "ruanyl/vim-gh-line",
+                        -- lsp_lines (pretty diagnostics)
+                        {
+                                "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+                                lazy = false,
+                                after = "mason-lspconfig.nvim",
+                                module = "lsp_lines",
+                                config = function() require("lsp_lines").setup() end,
+                        },
 
-                        -- You can disable default plugins as follows:
-                        -- ["goolord/alpha-nvim"] = { disable = true },
-
-                        -- You can also add new plugins here as well:
-                        -- Add plugins, the packer syntax without the "use"
-                        -- { "andweeb/presence.nvim" },
-                        -- {
-                        --   "ray-x/lsp_signature.nvim",
-                        --   event = "BufRead",
-                        --   config = function()
-                        --     require("lsp_signature").setup()
-                        --   end,
-                        -- },
-
-                        -- We also support a key value style plugin definition similar to NvChad:
-                        -- ["ray-x/lsp_signature.nvim"] = {
-                        --   event = "BufRead",
-                        --   config = function()
-                        --     require("lsp_signature").setup()
-                        --   end,
-                        -- },
                 },
                 -- All other entries override the require("<key>").setup({...}) call for default plugins
                 ["null-ls"] = function(config) -- overrides `require("null-ls").setup(config)`
